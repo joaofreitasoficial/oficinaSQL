@@ -1,0 +1,56 @@
+-- Listar todos os clientes
+SELECT * FROM Cliente;
+
+-- Listar todas as ordens de serviço
+SELECT * FROM OrdemServico;
+
+-- Ordens de serviço concluídas
+SELECT * FROM OrdemServico WHERE Status = 'Concluído';
+
+-- Veículos da marca Ford
+SELECT * FROM Veiculo WHERE Marca = 'Ford';
+
+-- Valor total gasto por cliente
+SELECT 
+    Cliente.Nome,
+    SUM(OrdemServico.Valor_Total) AS Total_Gasto
+FROM 
+    OrdemServico
+JOIN 
+    Veiculo ON OrdemServico.ID_Veiculo = Veiculo.ID_Veiculo
+JOIN 
+    Cliente ON Veiculo.ID_Cliente = Cliente.ID_Cliente
+GROUP BY 
+    Cliente.ID_Cliente;
+
+-- Ordens de serviço ordenadas por data de emissão (mais recente primeiro)
+SELECT * FROM OrdemServico ORDER BY Data_Emissao DESC;
+
+-- Clientes que gastaram mais de 250
+SELECT 
+    Cliente.Nome,
+    SUM(OrdemServico.Valor_Total) AS Total_Gasto
+FROM 
+    OrdemServico
+JOIN 
+    Veiculo ON OrdemServico.ID_Veiculo = Veiculo.ID_Veiculo
+JOIN 
+    Cliente ON Veiculo.ID_Cliente = Cliente.ID_Cliente
+GROUP BY 
+    Cliente.ID_Cliente
+HAVING 
+    Total_Gasto > 250;
+
+-- Detalhes das ordens de serviço com informações do cliente e veículo
+SELECT 
+    OrdemServico.Numero_OS,
+    Cliente.Nome AS Cliente,
+    Veiculo.Placa,
+    OrdemServico.Valor_Total,
+    OrdemServico.Status
+FROM 
+    OrdemServico
+JOIN 
+    Veiculo ON OrdemServico.ID_Veiculo = Veiculo.ID_Veiculo
+JOIN 
+    Cliente ON Veiculo.ID_Cliente = Cliente.ID_Cliente;
