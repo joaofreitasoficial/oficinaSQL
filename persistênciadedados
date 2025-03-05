@@ -1,0 +1,53 @@
+-- Inserir clientes
+INSERT INTO Cliente (Nome, CPF, Endereco, Telefone)
+VALUES 
+    ('João Silva', '123.456.789-00', 'Rua A, 123', '(11) 9999-8888'),
+    ('Maria Souza', '987.654.321-00', 'Av. B, 456', '(11) 7777-6666');
+
+-- Inserir veículos
+INSERT INTO Veiculo (Placa, Marca, Modelo, Ano, ID_Cliente)
+VALUES 
+    ('ABC-1234', 'Ford', 'Fiesta', 2018, 1),
+    ('XYZ-5678', 'Chevrolet', 'Onix', 2020, 2);
+
+-- Inserir equipes
+INSERT INTO Equipe (Nome_Equipe)
+VALUES 
+    ('Equipe A'),
+    ('Equipe B');
+
+-- Inserir mecânicos
+INSERT INTO Mecanico (Nome, Endereco, Especialidade, ID_Equipe)
+VALUES 
+    ('Carlos Oliveira', 'Rua C, 789', 'Motor', 1),
+    ('Ana Lima', 'Av. D, 101', 'Elétrica', 2);
+
+-- Inserir serviços
+INSERT INTO Servico (Descricao, Valor_MaoDeObra)
+VALUES 
+    ('Troca de óleo', 50.00),
+    ('Revisão geral', 150.00);
+
+-- Inserir peças
+INSERT INTO Peca (Nome, Valor)
+VALUES 
+    ('Filtro de óleo', 30.00),
+    ('Pastilha de freio', 80.00);
+
+-- Inserir ordens de serviço
+INSERT INTO OrdemServico (Numero_OS, Data_Emissao, Valor_Total, Status, Data_Conclusao, ID_Veiculo, ID_Equipe)
+VALUES 
+    ('OS001', '2023-10-01', 200.00, 'Concluído', '2023-10-05', 1, 1),
+    ('OS002', '2023-10-02', 300.00, 'Em andamento', NULL, 2, 2);
+
+-- Inserir serviços na OS
+INSERT INTO Servicos_OS (ID_OS, ID_Servico, Quantidade)
+VALUES 
+    (1, 1, 1),  -- Troca de óleo na OS001
+    (2, 2, 1);  -- Revisão geral na OS002
+
+-- Inserir peças na OS
+INSERT INTO Pecas_OS (ID_OS, ID_Peca, Quantidade)
+VALUES 
+    (1, 1, 1),  -- Filtro de óleo na OS001
+    (2, 2, 2);  -- Pastilha de freio na OS002
